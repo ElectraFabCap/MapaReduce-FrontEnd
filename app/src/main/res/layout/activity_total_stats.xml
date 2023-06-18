@@ -1,0 +1,142 @@
+<?xml version="1.0" encoding="utf-8"?>
+<androidx.constraintlayout.widget.ConstraintLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:background="#E4BEBE">
+
+    <androidx.constraintlayout.widget.ConstraintLayout
+        android:layout_width="328dp"
+        android:layout_height="655dp"
+        android:background="@drawable/rounded_outline"
+        android:backgroundTint="#8FEBF4F8"
+        app:layout_constraintBottom_toBottomOf="parent"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toTopOf="parent">
+
+        <TextView
+            android:id="@+id/DistLabel"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="@string/Total_Distance"
+            android:textSize="18sp"
+            app:layout_constraintBottom_toBottomOf="parent"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintHorizontal_bias="0.078"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toTopOf="parent"
+            app:layout_constraintVertical_bias="0.221" />
+
+        <TextView
+            android:id="@+id/ElevationLabel"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="@string/Total_Elevation"
+            android:textSize="18sp"
+            app:layout_constraintBottom_toTopOf="@+id/SpeedLabel"
+            app:layout_constraintEnd_toEndOf="@+id/TimeLabel"
+            app:layout_constraintHorizontal_bias="0.0"
+            app:layout_constraintStart_toStartOf="@+id/TimeLabel"
+            app:layout_constraintTop_toBottomOf="@+id/TimeLabel"
+            app:layout_constraintVertical_bias="0.49" />
+
+        <TextView
+            android:id="@+id/SpeedLabel"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="@string/Average_Speed"
+            android:textSize="18sp"
+            app:layout_constraintBottom_toBottomOf="parent"
+            app:layout_constraintEnd_toEndOf="@+id/ElevationLabel"
+            app:layout_constraintHorizontal_bias="1.0"
+            app:layout_constraintStart_toStartOf="@+id/ElevationLabel"
+            app:layout_constraintTop_toBottomOf="@+id/DistLabel"
+            app:layout_constraintVertical_bias="0.642" />
+
+        <TextView
+            android:id="@+id/TimeLabel"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="@string/Excercise_Time"
+            android:textSize="18sp"
+            app:layout_constraintBottom_toTopOf="@+id/SpeedLabel"
+            app:layout_constraintEnd_toEndOf="@+id/DistLabel"
+            app:layout_constraintHorizontal_bias="1.0"
+            app:layout_constraintStart_toStartOf="@+id/DistLabel"
+            app:layout_constraintTop_toBottomOf="@+id/DistLabel"
+            app:layout_constraintVertical_bias="0.292" />
+
+        <TextView
+            android:id="@+id/Title"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="@string/Total_Stats"
+            android:textSize="36sp"
+            app:layout_constraintBottom_toBottomOf="parent"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toTopOf="parent"
+            app:layout_constraintVertical_bias="0.026" />
+
+        <TextView
+            android:id="@+id/DistValue"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="@string/placeholder"
+            android:textSize="18sp"
+            app:layout_constraintBottom_toBottomOf="@+id/DistLabel"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintHorizontal_bias="0.722"
+            app:layout_constraintStart_toEndOf="@+id/DistLabel"
+            app:layout_constraintTop_toTopOf="@+id/DistLabel"
+            app:layout_constraintVertical_bias="1.0" />
+
+        <TextView
+            android:id="@+id/TimeValue"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="@string/placeholder"
+            android:textSize="18sp"
+            app:layout_constraintBottom_toBottomOf="@+id/TimeLabel"
+            app:layout_constraintEnd_toEndOf="@+id/DistValue"
+            app:layout_constraintStart_toStartOf="@+id/DistValue"
+            app:layout_constraintTop_toTopOf="@+id/TimeLabel" />
+
+        <TextView
+            android:id="@+id/ElevationValue"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="@string/placeholder"
+            android:textSize="18sp"
+            app:layout_constraintBottom_toBottomOf="@+id/ElevationLabel"
+            app:layout_constraintEnd_toEndOf="@+id/TimeValue"
+            app:layout_constraintStart_toStartOf="@+id/TimeValue"
+            app:layout_constraintTop_toTopOf="@+id/ElevationLabel" />
+
+        <TextView
+            android:id="@+id/SpeedValue"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="@string/placeholder"
+            android:textSize="18sp"
+            app:layout_constraintBottom_toBottomOf="@+id/SpeedLabel"
+            app:layout_constraintEnd_toEndOf="@+id/ElevationValue"
+            app:layout_constraintStart_toStartOf="@+id/ElevationValue"
+            app:layout_constraintTop_toTopOf="@+id/SpeedLabel" />
+
+        <Button
+            android:id="@+id/BackButton"
+            android:layout_width="129dp"
+            android:layout_height="61dp"
+            android:text="@string/Button_Back"
+            android:textSize="24sp"
+            app:layout_constraintBottom_toBottomOf="parent"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintHorizontal_bias="0.502"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toTopOf="parent"
+            app:layout_constraintVertical_bias="0.973" />
+    </androidx.constraintlayout.widget.ConstraintLayout>
+</androidx.constraintlayout.widget.ConstraintLayout>
