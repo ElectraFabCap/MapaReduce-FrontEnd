@@ -31,11 +31,10 @@ public class WalkStatsActivity extends AppCompatActivity {
     }
 
     private void loadValues() {
-        //TODO: GET IP, PATH FROM APP
-        //TODO: SELECT IF YOU WANT TOTAL STATS OR TOTAL AVERAGE STATS
+        //TODO: GET IP, GPX PATH FROM APP
         //TODO: MAYBE SHOW ERROR IN UI?
-
         //TODO: DIAFORA ME MESO ORO
+
         ObjectOutputStream out= null ;
         ObjectInputStream in = null ;
         Socket requestSocket= null ;
@@ -69,16 +68,7 @@ public class WalkStatsActivity extends AppCompatActivity {
         } catch (UnknownHostException unknownHost) {
             System.err.println("You are trying to connect to an unknown host!");
 
-            binding.DistValue.setText("N/A");
-            binding.ElevationValue.setText("N/A");
-            binding.TimeValue.setText("N/A");
-            binding.SpeedValue.setText("N/A");
-
         }catch(ClassNotFoundException e){
-            binding.DistValue.setText("N/A");
-            binding.ElevationValue.setText("N/A");
-            binding.TimeValue.setText("N/A");
-            binding.SpeedValue.setText("N/A");
 
             throw new RuntimeException(e);
         } catch (IOException ioException) {

@@ -30,7 +30,7 @@ public class UserStatsActivity extends AppCompatActivity {
 
     private void loadValues() {
         //TODO: GET IP AND USERNAME FROM APP
-        //TODO: SELECT IF YOU WANT TOTAL STATS OR TOTAL AVERAGE STATS
+        //TODO: SELECT IF YOU WANT USER STATS OR USER AVERAGE STATS
         //TODO: MAYBE SHOW ERROR IN UI?
 
         DataOutputStream out= null ;
@@ -60,12 +60,6 @@ public class UserStatsActivity extends AppCompatActivity {
 
         } catch (IOException ioException) {
             ioException.printStackTrace();
-
-            binding.UserName.setText("N/A");
-            binding.DistValue.setText("N/A");
-            binding.ElevationValue.setText("N/A");
-            binding.TimeValue.setText("N/A");
-            binding.SpeedValue.setText("N/A");
 
         } catch (ClassNotFoundException e) {
             throw new RuntimeException(e);

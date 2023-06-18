@@ -62,10 +62,6 @@ public class TotalStatsActivity extends AppCompatActivity {
         } catch (IOException ioException) {
             ioException.printStackTrace();
 
-            binding.DistValue.setText("N/A");
-            binding.ElevationValue.setText("N/A");
-            binding.TimeValue.setText("N/A");
-            binding.SpeedValue.setText("N/A");
         } catch (ClassNotFoundException e) {
             throw new RuntimeException(e);
         } finally {
