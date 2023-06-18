@@ -3,6 +3,7 @@
     <string name="Total_Stats"> Total Stats </string>
     <string name="Walk_Stats"> Walk Stats </string>
     <string name="Username"> Username: </string>
+    <string name="placeholder_name"> testname12 </string>
     <string name="Total_Distance"> Total Distance </string>
     <string name="Exercise_Time"> Exercise Time </string>
     <string name="Total_Elevation"> Total Elevation </string>
