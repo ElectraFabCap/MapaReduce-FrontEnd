@@ -6,6 +6,13 @@ import android.view.View;
 import androidx.appcompat.app.AppCompatActivity;
 
 import com.example.distributedsystems2023.databinding.ActivityUserStatsBinding;
+import com.example.distributedsystems2023.utils.GPXStatistics;
+
+import java.io.DataOutputStream;
+import java.io.IOException;
+import java.io.ObjectInputStream;
+import java.net.Socket;
+import java.util.HashMap;
 
 public class UserStatsActivity extends AppCompatActivity {
 
@@ -22,13 +29,54 @@ public class UserStatsActivity extends AppCompatActivity {
     }
 
     private void loadValues() {
-        //TODO: create socket connection and fetch the 4 float values from the server, then put them as arguments for the 4 setText() methods and uncomment them
-        //TODO: also get user's name for this one and set it as argument for the first method
-        //binding.UserName.setText();
-        //binding.DistValue.setText();
-        //binding.ElevationValue.setText();
-        //binding.TimeValue.setText();
-        //binding.SpeedValue.setText();
+        //TODO: GET IP AND USERNAME FROM APP
+        //TODO: SELECT IF YOU WANT TOTAL STATS OR TOTAL AVERAGE STATS
+        //TODO: MAYBE SHOW ERROR IN UI?
+
+        DataOutputStream out= null ;
+        ObjectInputStream in = null ;
+        Socket requestSocket= null ;
+
+        try {
+            requestSocket = new Socket("localhost",60001);
+            out = new DataOutputStream(requestSocket.getOutputStream());
+
+            out.writeUTF("user1");
+            out.flush();
+
+            in = new ObjectInputStream(requestSocket.getInputStream());
+            HashMap<String, GPXStatistics> res = (HashMap<String,GPXStatistics>) in.readObject();
+            //GPXStatistics userAverages = res.get("userAverageStats");
+            GPXStatistics userTotal = res.get("userTotalStats");
+
+            //System.out.println("User Average: " + userAverages.toString());
+            //System.out.println("User Total: " + userTotal.toString());
+
+            binding.UserName.setText(userTotal.getUser());
+            binding.DistValue.setText(String.valueOf(userTotal.getTotalDistance()));
+            binding.ElevationValue.setText(String.valueOf(userTotal.getTotalElevation()));
+            binding.TimeValue.setText(String.valueOf(userTotal.getTotalExerciseTime()));
+            binding.SpeedValue.setText(String.valueOf(userTotal.getAverageSpeed()));
+
+        } catch (IOException ioException) {
+            ioException.printStackTrace();
+
+            binding.UserName.setText("N/A");
+            binding.DistValue.setText("N/A");
+            binding.ElevationValue.setText("N/A");
+            binding.TimeValue.setText("N/A");
+            binding.SpeedValue.setText("N/A");
+
+        } catch (ClassNotFoundException e) {
+            throw new RuntimeException(e);
+        } finally {
+            try {
+                in.close();	out.close();
+                requestSocket.close();
+            } catch (IOException ioException) {
+                ioException.printStackTrace();
+            }
+        }
     }
 
     private void assignBackButtonListener() {
