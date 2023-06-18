@@ -10,4 +10,8 @@
     <string name="Average_Speed"> Average Speed </string>
     <string name="placeholder"> 0.0 </string>
     <string name="Button_Back"> BACK </string>
+    <string name="Hello">Hello</string>
+    <string name="Electra">Electra</string>
+    <string name="choose_gpx_file">Choose GPX File</string>
+    <string name="personal_statistics">Personal Statistics</string>
 </resources>
