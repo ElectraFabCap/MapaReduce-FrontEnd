@@ -27,7 +27,6 @@ public class MainActivity extends AppCompatActivity {
 
         binding = ActivityMainBinding.inflate(getLayoutInflater());
         setContentView(binding.getRoot());
-
         layoutFile = findViewById(R.id.layoutFile);
         layoutWalk = findViewById(R.id.layoutWalk);
         layoutTotal = findViewById(R.id.layoutTotal);
@@ -36,7 +35,7 @@ public class MainActivity extends AppCompatActivity {
         layoutFile.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
-                Intent intent = new Intent(MainActivity.this, WalkStatsActivity.class);
+                Intent intent = new Intent(MainActivity.this, SelectFilesActivity.class);
                 startActivity(intent);
             }
         });
@@ -64,16 +63,11 @@ public class MainActivity extends AppCompatActivity {
         binding.LogoutButton.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
-                logout();
                 goToLogin();
             }
         });
     }
 
-
-    private void logout() {
-        //might not use this at all :/
-    }
 
     private void goToLogin() {
         Intent intent = new Intent(MainActivity.this, LoginActivity.class);
