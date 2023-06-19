@@ -13,5 +13,15 @@
     <string name="Hello">Hello</string>
     <string name="Electra">Electra</string>
     <string name="choose_gpx_file">Choose GPX File</string>
+    <string name="total_statistics">Total Statistics</string>
     <string name="personal_statistics">Personal Statistics</string>
+    <string name="Button_Logout"> Log Out</string>
+    <string name="title_activity_login">LoginActivity</string>
+    <string name="prompt_user">Username</string>
+    <string name="action_sign_in">Sign in or register</string>
+    <string name="action_sign_in_short">Sign in</string>
+    <string name="welcome">"Welcome !"</string>
+    <string name="invalid_username">Not a valid username</string>
+    <string name="login_failed">"Login failed"</string>
+
 </resources>

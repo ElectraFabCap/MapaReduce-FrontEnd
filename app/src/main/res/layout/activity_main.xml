@@ -80,9 +80,10 @@
                 android:gravity="center"
                 android:orientation="vertical"
                 android:padding="15dp"
+                android:clickable="true"
                 app:layout_constraintDimensionRatio="H,1:1"
                 app:layout_constraintStart_toStartOf="parent"
-                app:layout_constraintEnd_toStartOf="@id/layoutStats"
+                app:layout_constraintEnd_toStartOf="@id/layoutWalk"
                 app:layout_constraintTop_toTopOf="parent">
 
                 <ImageView
@@ -105,7 +106,7 @@
             </LinearLayout>
 
             <LinearLayout
-                android:id='@+id/layoutStats'
+                android:id='@+id/layoutWalk'
                 android:layout_width="0dp"
                 android:layout_height="wrap_content"
                 android:layout_marginTop="22dp"
@@ -114,6 +115,7 @@
                 android:orientation="vertical"
                 app:layout_constraintStart_toEndOf="@id/layoutFile"
                 android:padding="15dp"
+                android:clickable="true"
                 app:layout_constraintDimensionRatio="H,1:1"
                 app:layout_constraintEnd_toEndOf="parent"
                 app:layout_constraintTop_toTopOf="parent">
@@ -138,9 +140,58 @@
             </LinearLayout>
 
 
+            <LinearLayout
+                android:id='@+id/layoutTotal'
+                android:layout_width="0dp"
+                android:layout_height="wrap_content"
+                android:layout_marginTop="22dp"
+                android:background="@drawable/white_rectangle_background"
+                android:gravity="center"
+                android:orientation="vertical"
+                android:padding="20dp"
+                android:clickable="true"
+                app:layout_constraintDimensionRatio="H,1:1"
+                app:layout_constraintStart_toStartOf="parent"
+                app:layout_constraintEnd_toStartOf="@id/layoutWalk"
+                app:layout_constraintTop_toBottomOf="@id/layoutFile">
+
+                <ImageView
+                    android:layout_width="110dp"
+                    android:layout_height="110dp"
+                    android:layout_margin="8dp"
+                    android:contentDescription="@string/app_name"
+                    android:padding="8dp"
+                    android:src="@drawable/healthicon"/>
+
+                <TextView
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:gravity="center"
+                    android:text='@string/total_statistics'
+                    android:textColor="@color/colorAccent"
+                    android:textSize="20sp"
+                    android:textStyle="bold"/>
+
+            </LinearLayout>
+
+
             ></androidx.constraintlayout.widget.ConstraintLayout>
 
 
     </ScrollView>
+
+    <Button
+        android:id="@+id/LogoutButton"
+        android:layout_width="129dp"
+        android:layout_height="61dp"
+        android:text="@string/Button_Logout"
+        android:textSize="18sp"
+        android:backgroundTint="@color/colorPrimaryDark"
+        app:layout_constraintBottom_toBottomOf="parent"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintHorizontal_bias="0.502"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toTopOf="parent"
+        app:layout_constraintVertical_bias="0.973" />
 
 </androidx.constraintlayout.widget.ConstraintLayout>

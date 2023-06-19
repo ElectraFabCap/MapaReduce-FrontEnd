@@ -10,7 +10,7 @@
         android:layout_width="328dp"
         android:layout_height="655dp"
         android:background="@drawable/rounded_outline"
-        android:backgroundTint="#8FEBF4F8"
+        android:backgroundTint="@color/colorWhite"
         app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"

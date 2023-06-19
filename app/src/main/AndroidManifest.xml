@@ -12,11 +12,14 @@
         android:supportsRtl="true"
         android:theme="@style/Theme.DistributedSystems2023"
         tools:targetApi="31">
-        <activity android:name=".WalkStatsActivity"
+        <activity
+            android:name=".WalkStatsActivity"
             android:exported="false" />
-        <activity android:name=".UserStatsActivity"
+        <activity
+            android:name=".UserStatsActivity"
             android:exported="false" />
-        <activity android:name=".TotalStatsActivity"
+        <activity
+            android:name=".TotalStatsActivity"
             android:exported="false" />
         <activity
             android:name=".MainActivity"
