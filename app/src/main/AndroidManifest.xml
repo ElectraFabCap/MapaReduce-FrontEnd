@@ -25,7 +25,7 @@
             android:name=".TotalStatsActivity"
             android:exported="false" />
         <activity
-            android:name=".utils.ui.login.LoginActivity"
+            android:name=".LoginActivity"
             android:exported="false" />
         <activity
             android:name=".MainActivity"
