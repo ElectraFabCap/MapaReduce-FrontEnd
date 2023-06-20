@@ -13,7 +13,7 @@ import com.example.distributedsystems2023.utils.ui.login.LoginActivity;
 
 public class MainActivity extends AppCompatActivity {
 
-    private static final String user_id = "user_id";
+    private final  String username = getIntent().getStringExtra("username");;
     private ActivityMainBinding binding;
 
     private LinearLayout layoutFile;

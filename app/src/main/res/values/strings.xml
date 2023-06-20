@@ -66,5 +66,7 @@
         vestibulum. Fusce dictum libero quis erat maximus, vitae volutpat diam dignissim.
     </string>
     <string name="title_activity_select_files">SelectFilesActivity</string>
+    <string name="select_a_gpx_file">Select a GPX file</string>
+    <string name="gpx_file_1">GPX File 1</string>
 
 </resources>
