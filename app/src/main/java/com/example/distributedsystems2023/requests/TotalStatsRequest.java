@@ -47,11 +47,12 @@ public class TotalStatsRequest extends Thread{
             binding.TimeValue.setText(String.valueOf(totalStats.getTotalExerciseTime()));
             binding.SpeedValue.setText(String.valueOf(totalStats.getAverageSpeed()));
 
-            System.out.println(totalStats.getTotalElevation() + " allah");
         } catch (IOException ioException) {
             ioException.printStackTrace();
         } catch (ClassNotFoundException e) {
             throw new RuntimeException(e);
+        } catch (Exception e) {
+            e.printStackTrace();
         } finally {
             try {
                 in.close();

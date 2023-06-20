@@ -53,7 +53,9 @@ public class UserStatsRequest extends Thread{
 
         } catch (ClassNotFoundException e) {
             throw new RuntimeException(e);
-        } finally {
+        } catch (Exception e) {
+                e.printStackTrace();
+        }finally {
             try {
                 in.close();	out.close();
                 requestSocket.close();

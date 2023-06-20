@@ -8,9 +8,14 @@ import android.net.Uri;
 import android.os.Bundle;
 import android.view.View;
 import android.widget.Button;
-
 import com.example.distributedsystems2023.databinding.ActivitySelectFilesBinding;
-import com.example.distributedsystems2023.databinding.ActivityTotalStatsBinding;
+import java.io.BufferedReader;
+import java.io.File;
+import java.io.FileWriter;
+import java.io.IOException;
+import java.io.InputStream;
+import java.io.InputStreamReader;
+import java.util.Objects;
 
 public class SelectFilesActivity extends AppCompatActivity {
 
@@ -48,10 +53,34 @@ public class SelectFilesActivity extends AppCompatActivity {
 
         if (requestCode == REQUEST_PICK_FILE && resultCode == RESULT_OK && data != null) {
             Uri uri = data.getData();
+            String tempFilePath = getExternalCacheDir() + "/" + new File(uri.getPath()).getName();
+            File tempFile = new File(tempFilePath);
+            try {
+                FileWriter myWriter = new FileWriter(tempFilePath);
+                myWriter.write(readTextFromUri(uri));
+                myWriter.close();
+            } catch (IOException e) {
+                throw new RuntimeException(e);
+            }
+
             Intent intent = new Intent(this, WalkStatsActivity.class);
-            intent.putExtra("fileuri", uri.toString());
+            intent.putExtra("path", tempFilePath);
             startActivity(intent);
         }
+    }
+
+    private String readTextFromUri(Uri uri) throws IOException {
+        StringBuilder stringBuilder = new StringBuilder();
+        try (InputStream inputStream =
+                     getContentResolver().openInputStream(uri);
+             BufferedReader reader = new BufferedReader(
+                     new InputStreamReader(Objects.requireNonNull(inputStream)))) {
+            String line;
+            while ((line = reader.readLine()) != null) {
+                stringBuilder.append(line);
+            }
+        }
+        return stringBuilder.toString();
     }
 
     private void assignBackButtonListener() {

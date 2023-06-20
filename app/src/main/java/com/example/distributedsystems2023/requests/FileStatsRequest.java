@@ -17,12 +17,12 @@ public class FileStatsRequest extends Thread {
     private ActivityWalkStatsBinding binding;
     private String ip;
 
-    private String fileURI;
+    private String path;
 
-    public FileStatsRequest(ActivityWalkStatsBinding binding, String ip, String fileURI){
+    public FileStatsRequest(ActivityWalkStatsBinding binding, String ip, String path){
         this.binding = binding;
         this.ip = ip;
-        this.fileURI = fileURI;
+        this.path = path;
     }
 
     public void run() {
@@ -33,13 +33,16 @@ public class FileStatsRequest extends Thread {
         //TODO: CHECK IF FILE USERNAME IS SAME WITH THE CURRENT LOGGED IN USER
         try {
             /* Create socket for contacting the server on port 60000*/
-            requestSocket = new Socket(ip,60000);
+            requestSocket = new Socket(this.ip,60000);
 
             /* Create the streams to send and receive data from server */
             out = new ObjectOutputStream(requestSocket.getOutputStream());
             in = new ObjectInputStream(requestSocket.getInputStream());
 
-            GPXFile file = new GPXFile(this.fileURI); //MIGHT NOT BE CORRECT
+            GPXFile file = new GPXFile(this.path); //MIGHT NOT BE CORRECT
+            //GPXFile file = new GPXFile("/sdcard/Download/route1.gpx"); //MIGHT NOT BE CORRECT
+
+            System.out.println("FILE CONTENT: " + file.getContentAsString());
             out.writeObject(file);
             out.flush();
 
@@ -56,14 +59,14 @@ public class FileStatsRequest extends Thread {
             binding.TimeValue.setText(String.valueOf(currentWalkStats.getTotalExerciseTime()));
             binding.SpeedValue.setText(String.valueOf(currentWalkStats.getAverageSpeed()));
 
-        } catch (UnknownHostException unknownHost) {
-            System.err.println("You are trying to connect to an unknown host!");
-
-        }catch(ClassNotFoundException e){
-
-            throw new RuntimeException(e);
-        } catch (IOException ioException) {
-            ioException.printStackTrace();
+//        } catch (UnknownHostException unknownHost) {
+//            System.err.println("You are trying to connect to an unknown host!");
+//        }catch(ClassNotFoundException e){
+//            throw new RuntimeException(e);
+//        } catch (IOException ioException) {
+//            ioException.printStackTrace();
+        } catch (Exception e) {
+            e.printStackTrace();
         } finally {
             try {
                 in.close();	out.close();

@@ -27,27 +27,27 @@ public class WalkStatsActivity extends AppCompatActivity {
         super.onCreate(savedInstanceState);
 
         String ip = ((GPXApplication) this.getApplication()).getMasterIP();
-        String file = getIntent().getStringExtra("fileURI");
-
         binding = ActivityWalkStatsBinding.inflate(getLayoutInflater());
         setContentView(binding.getRoot());
 
         this.assignBackButtonListener();
-        this.loadValues(ip, file);
-        Intent intent = getIntent();
-        if (intent != null) {
-            String fileUri = intent.getStringExtra("fileUri");
-            //This is where we do stuff with the uri (For Panos :D)
-        }
 
+        Intent intent = getIntent();
+        //if (intent != null) {
+        String path = intent.getStringExtra("path");
+        //hopefully this will never be null
+        //This is where we do stuff with the uri (For Panos :D)
+        //}
+        this.loadValues(ip, path);
     }
 
-    private void loadValues(String ip, String file) {
+    private void loadValues(String ip, String path) {
         //TODO: MAYBE SHOW ERROR IN UI?
         //TODO: DIAFORA ME MESO ORO
         //TODO: CHECK IF FILE USERNAME IS SAME WITH THE CURRENT LOGGED IN USER
 
-        FileStatsRequest request = new FileStatsRequest(this.binding, ip, file);
+        FileStatsRequest request = new FileStatsRequest(this.binding, ip, path);
+        request.start();
     }
 
     private void assignBackButtonListener() {
