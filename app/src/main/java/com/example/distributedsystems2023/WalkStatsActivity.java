@@ -1,5 +1,6 @@
 package com.example.distributedsystems2023;
 
+import android.content.Intent;
 import android.os.Bundle;
 import android.view.View;
 
@@ -33,6 +34,12 @@ public class WalkStatsActivity extends AppCompatActivity {
 
         this.assignBackButtonListener();
         this.loadValues(ip, file);
+        Intent intent = getIntent();
+        if (intent != null) {
+            String fileUri = intent.getStringExtra("fileUri");
+            //This is where we do stuff with the uri (For Panos :D)
+        }
+
     }
 
     private void loadValues(String ip, String file) {
