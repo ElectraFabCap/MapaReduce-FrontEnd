@@ -12,6 +12,7 @@ import androidx.annotation.Nullable;
 import androidx.annotation.StringRes;
 import androidx.appcompat.app.AppCompatActivity;
 
+import android.os.Handler;
 import android.text.Editable;
 import android.text.TextWatcher;
 import android.view.View;
@@ -23,98 +24,74 @@ import android.widget.Toast;
 import com.example.distributedsystems2023.databinding.ActivityLoginBinding;
 
 public class LoginActivity extends AppCompatActivity {
-
-//    private LoginViewModel loginViewModel;
     private ActivityLoginBinding binding;
 
     @Override
     public void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
 
+
         binding = ActivityLoginBinding.inflate(getLayoutInflater());
         setContentView(binding.getRoot());
-
-//        loginViewModel = new ViewModelProvider(this, new LoginViewModelFactory())
-//                .get(LoginViewModel.class);
 
         final EditText usernameEditText = binding.username;
         final EditText ipEditText= binding.ip;
         final Button loginButton = binding.login;
         final ProgressBar loadingProgressBar = binding.loading;
 
-//        loginViewModel.getLoginFormState().observe(this, new Observer<LoginFormState>() {
-//            @Override
-//            public void onChanged(@Nullable LoginFormState loginFormState) {
-//                if (loginFormState == null) {
-//                    return;
-//                }
-//                loginButton.setEnabled(loginFormState.isDataValid());
-//                if (loginFormState.getUsernameError() != null) {
-//                    usernameEditText.setError(getString(loginFormState.getUsernameError()));
-//                }
-//                if (loginFormState.getIPError() != null) {
-//                    ipEditText.setError(getString(loginFormState.getIPError()));
-//                }
-//            }
-//        });
-//
-//        loginViewModel.getLoginResult().observe(this, new Observer<LoginResult>() {
-//            @Override
-//            public void onChanged(@Nullable LoginResult loginResult) {
-//                if (loginResult == null) {
-//                    return;
-//                }
-//                loadingProgressBar.setVisibility(View.GONE);
-//                if (loginResult.getError() != null) {
-//                    showLoginFailed(loginResult.getError());
-//                }
-//                if (loginResult.getSuccess() != null) {
-//                    updateUiWithUser(loginResult.getSuccess());
-//                }
-//                setResult(Activity.RESULT_OK);
-//                finish();
-//            }
-//        });
-//
-//        TextWatcher afterTextChangedListener = new TextWatcher() {
-//            @Override
-//            public void beforeTextChanged(CharSequence s, int start, int count, int after) {
-//                // ignore
-//            }
-//
-//            @Override
-//            public void onTextChanged(CharSequence s, int start, int before, int count) {
-//                // ignore
-//            }
-//
-//            @Override
-//            public void afterTextChanged(Editable s) {
-//                loginViewModel.loginDataChanged(usernameEditText.getText().toString());
-//            }
-//        };
-//        usernameEditText.addTextChangedListener(afterTextChangedListener);
-//
-//
-//        loginButton.setOnClickListener(new View.OnClickListener() {
-//            @Override
-//            public void onClick(View v) {
-//                loadingProgressBar.setVisibility(View.VISIBLE);
-//                loginViewModel.login(usernameEditText.getText().toString(), ipEditText.getText().toString());
-//            }
-//        });
+        loginButton.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                String username = usernameEditText.getText().toString().trim();
+                String ip = ipEditText.getText().toString().trim();
+
+                if (checkUsername(username) && checkIP(ip)) {
+                    loadingProgressBar.setVisibility(View.VISIBLE);
+                    new Handler().postDelayed(new Runnable() {
+                        @Override
+                        public void run() {
+                            loadingProgressBar.setVisibility(View.GONE);
+                            gotoMain(username,ip);
+                        }
+                    }, 2000);
+                } else {
+
+                    loginFail();
+                }
+
+
+            }
+        });
+
+
     }
 
-//    private void updateUiWithUser(LoggedInUserView model) {
-//        String welcome = getString(R.string.welcome) + model.getDisplayName();
-//        // TODO : initiate successful logged in experience
-//        Toast.makeText(getApplicationContext(), welcome, Toast.LENGTH_LONG).show();
-//        String username = model.getDisplayName();
-//        Intent intent = new Intent(LoginActivity.this, MainActivity.class);
-//        intent.putExtra("username", username);
-//        startActivity(intent);
-//    }
 
-    private void showLoginFailed(@StringRes Integer errorString) {
-        Toast.makeText(getApplicationContext(), errorString, Toast.LENGTH_SHORT).show();
+    private boolean checkUsername(String username) {
+       return username.equals("1") || username.equals("2") || username.equals("3");
+
+    }
+
+    private boolean checkIP(String ip) {
+        String ipPattern = "^([01]?\\d\\d?|2[0-4]\\d|25[0-5])\\." +
+                "([01]?\\d\\d?|2[0-4]\\d|25[0-5])\\." +
+               "([01]?\\d\\d?|2[0-4]\\d|25[0-5])\\." +
+               "([01]?\\d\\d?|2[0-4]\\d|25[0-5])$";
+
+        return ip.matches(ipPattern);
+
+    }
+
+
+    private void loginFail() {
+        Toast.makeText(LoginActivity.this, "Username or IP are invalid.", Toast.LENGTH_SHORT).show();
+    }
+
+    private void gotoMain(String username, String ip) {
+        Intent intent = new Intent(LoginActivity.this, MainActivity.class);
+        intent.putExtra("username", username);
+        intent.putExtra("ip", ip);
+        startActivity(intent);
+        finish();
     }
 }
