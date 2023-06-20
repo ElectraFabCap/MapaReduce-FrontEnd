@@ -3,6 +3,7 @@ package com.example.distributedsystems2023.requests;
 import com.example.distributedsystems2023.databinding.ActivityTotalStatsBinding;
 import utils.GPXStatistics;
 
+import java.io.IOException;
 import java.io.ObjectInputStream;
 import java.io.ObjectOutputStream;
 import java.net.Socket;
@@ -47,18 +48,17 @@ public class TotalStatsRequest extends Thread{
             binding.SpeedValue.setText(String.valueOf(totalStats.getAverageSpeed()));
 
             System.out.println(totalStats.getTotalElevation() + " allah");
-        } catch (Exception ioException) {
+        } catch (IOException ioException) {
             ioException.printStackTrace();
+        } catch (ClassNotFoundException e) {
+            throw new RuntimeException(e);
+        } finally {
+            try {
+                in.close();
+                requestSocket.close();
+            } catch (IOException ioException) {
+                ioException.printStackTrace();
+            }
         }
-//        catch (ClassNotFoundException e) {
-//            throw new RuntimeException(e);
-//        } finally {
-//            try {
-//                in.close();
-//                requestSocket.close();
-//            } catch (IOException ioException) {
-//                ioException.printStackTrace();
-//            }
-//        }
     }
 }

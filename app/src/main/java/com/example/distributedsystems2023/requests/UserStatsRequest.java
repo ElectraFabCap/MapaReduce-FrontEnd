@@ -48,19 +48,18 @@ public class UserStatsRequest extends Thread{
             binding.TimeValue.setText(String.valueOf(userTotal.getTotalExerciseTime()));
             binding.SpeedValue.setText(String.valueOf(userTotal.getAverageSpeed()));
 
-        } catch (Exception ioException) {
+        } catch (IOException ioException) {
             ioException.printStackTrace();
 
+        } catch (ClassNotFoundException e) {
+            throw new RuntimeException(e);
+        } finally {
+            try {
+                in.close();	out.close();
+                requestSocket.close();
+            } catch (IOException ioException) {
+                ioException.printStackTrace();
+            }
         }
-//        catch (ClassNotFoundException e) {
-//            throw new RuntimeException(e);
-//        } finally {
-//            try {
-//                in.close();	out.close();
-//                requestSocket.close();
-//            } catch (IOException ioException) {
-//                ioException.printStackTrace();
-//            }
-//        }
     }
 }
