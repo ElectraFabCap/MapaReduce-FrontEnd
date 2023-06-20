@@ -7,12 +7,12 @@
     <string name="Walk_Stats"> Walk Stats </string>
     <string name="Username"> Username: </string>
     <string name="Main_Activity"> Main Activity</string>
-    <string name="placeholder_name"> testname12 </string>
+    <string name="placeholder_name"> guest </string>
     <string name="Total_Distance"> Total Distance </string>
     <string name="Exercise_Time"> Exercise Time </string>
     <string name="Total_Elevation"> Total Elevation </string>
     <string name="Average_Speed"> Average Speed </string>
-    <string name="placeholder"> 0.0 </string>
+    <string name="placeholder"> N/A </string>
     <string name="Button_Back"> BACK </string>
     <string name="Hello">Hello</string>
     <string name="choose_gpx_file">Choose GPX File</string>
@@ -23,7 +23,7 @@
     <string name="prompt_user">Username</string>
     <string name="action_sign_in_short">Sign in</string>
     <string name="welcome">"Welcome !"</string>
-    <string name="login_text"> Select 1-3 to Login</string>
+    <string name="login_text">Login</string>
     <string name="invalid_username">Not a valid username</string>
     <string name="invalid_ip">Not a valid IP Address</string>
     <string name="login_failed">"Login failed"</string>
