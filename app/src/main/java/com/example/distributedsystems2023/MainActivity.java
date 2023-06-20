@@ -22,12 +22,6 @@ public class MainActivity extends AppCompatActivity {
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_main);
-        Intent intent = getIntent();
-        if (intent != null) {
-            String username = intent.getStringExtra("username");
-            String ip = intent.getStringExtra("ip");
-
-        }
         binding = ActivityMainBinding.inflate(getLayoutInflater());
         setContentView(binding.getRoot());
         layoutFile = findViewById(R.id.layoutFile);
