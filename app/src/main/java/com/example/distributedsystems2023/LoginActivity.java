@@ -45,7 +45,7 @@ public class LoginActivity extends AppCompatActivity {
                 String username = usernameEditText.getText().toString().trim();
                 String ip = ipEditText.getText().toString().trim();
 
-                if (checkUsername(username) && checkIP(ip)) {
+                if (checkIP(ip)) {
                     loadingProgressBar.setVisibility(View.VISIBLE);
                     new Handler().postDelayed(new Runnable() {
                         @Override
@@ -67,18 +67,13 @@ public class LoginActivity extends AppCompatActivity {
     }
 
 
-    private boolean checkUsername(String username) {
-       return username.equals("1") || username.equals("2") || username.equals("3");
-
-    }
-
     private boolean checkIP(String ip) {
         String ipPattern = "^([01]?\\d\\d?|2[0-4]\\d|25[0-5])\\." +
                 "([01]?\\d\\d?|2[0-4]\\d|25[0-5])\\." +
                "([01]?\\d\\d?|2[0-4]\\d|25[0-5])\\." +
                "([01]?\\d\\d?|2[0-4]\\d|25[0-5])$";
 
-        return ip.matches(ipPattern);
+        return ip.matches(ipPattern) || ip.equals("localhost");
 
     }
 
@@ -89,8 +84,10 @@ public class LoginActivity extends AppCompatActivity {
 
     private void gotoMain(String username, String ip) {
         Intent intent = new Intent(LoginActivity.this, MainActivity.class);
-        intent.putExtra("username", username);
-        intent.putExtra("ip", ip);
+
+        ((GPXApplication) this.getApplication()).setUsername(username);
+        ((GPXApplication) this.getApplication()).setMasterIP(ip);
+
         startActivity(intent);
         finish();
     }
