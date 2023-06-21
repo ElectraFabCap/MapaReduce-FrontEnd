@@ -71,7 +71,7 @@ public class FileStatsRequest extends Thread {
                     public void run()
                     {
                         activity.getBinding().DistValue.setText(String.valueOf(
-                                Math.round(currentWalkStats.getTotalDistance()) / 1000
+                                (double) Math.round(currentWalkStats.getTotalDistance()) / 1000
                         ));
                         activity.getBinding().ElevationValue.setText(String.valueOf(
                                 (int) currentWalkStats.getTotalElevation()

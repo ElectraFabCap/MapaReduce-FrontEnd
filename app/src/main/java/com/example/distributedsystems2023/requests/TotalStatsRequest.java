@@ -47,7 +47,7 @@ public class TotalStatsRequest extends Thread{
                         public void run()
                         {
                             activity.getBinding().DistValue.setText(String.valueOf(
-                                    Math.round(totalStats.getTotalDistance()) / 1000
+                                    (double) Math.round(totalStats.getTotalDistance()) / 1000
                             ));
                             activity.getBinding().ElevationValue.setText(String.valueOf(
                                     (int) totalStats.getTotalElevation()
