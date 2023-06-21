@@ -35,11 +35,9 @@ public class WalkStatsActivity extends AppCompatActivity {
         this.assignBackButtonListener();
 
         Intent intent = getIntent();
-        //if (intent != null) {
         String path = intent.getStringExtra("path");
         //hopefully this will never be null
-        //This is where we do stuff with the uri (For Panos :D)
-        //}
+
         this.loadValues(ip, path);
 
     }

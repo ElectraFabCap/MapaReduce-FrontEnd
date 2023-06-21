@@ -40,9 +40,6 @@ public class UserStatsRequest extends Thread{
             //GPXStatistics userAverages = res.get("userAverageStats");
             GPXStatistics userTotal = res.get("userTotalStats");
 
-            //System.out.println("User Average: " + userAverages.toString());
-            //System.out.println("User Total: " + userTotal.toString());
-
             this.activity.runOnUiThread(
                     new Runnable()
                     {

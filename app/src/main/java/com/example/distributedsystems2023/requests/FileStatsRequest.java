@@ -59,9 +59,7 @@ public class FileStatsRequest extends Thread {
             GPXStatistics currentWalkStats = res.get("currentRun");
 //            GPXStatistics userAverage = res.get("userAverage");
 //            GPXStatistics totalAverage = res.get("totalAverage");
-//            System.out.println("Current Walk: " + currentWalkStats.toString());
-//            System.out.println("User Average: " + userAverage.toString());
-//            System.out.println("Total Average: " + totalAverage.toString() + "\n");
+
             this.activity.runOnUiThread(
                 new Runnable()
                 {
@@ -85,12 +83,12 @@ public class FileStatsRequest extends Thread {
                 }
             );
 
-//        } catch (UnknownHostException unknownHost) {
-//            System.err.println("You are trying to connect to an unknown host!");
-//        }catch(ClassNotFoundException e){
-//            throw new RuntimeException(e);
-//        } catch (IOException ioException) {
-//            ioException.printStackTrace();
+        } catch (UnknownHostException unknownHost) {
+            System.err.println("You are trying to connect to an unknown host!");
+        }catch(ClassNotFoundException e){
+            throw new RuntimeException(e);
+        } catch (IOException ioException) {
+            ioException.printStackTrace();
         } catch (Exception e) {
             e.printStackTrace();
         } finally {
