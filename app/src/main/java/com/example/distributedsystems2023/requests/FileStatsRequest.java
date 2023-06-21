@@ -48,17 +48,8 @@ public class FileStatsRequest extends Thread {
         Socket requestSocket= null ;
 
         try {
-            /* Create socket for contacting the server on port 60000*/
-            requestSocket = new Socket(this.ip,60000);
-
-            /* Create the streams to send and receive data from server */
-            out = new ObjectOutputStream(requestSocket.getOutputStream());
-            in = new ObjectInputStream(requestSocket.getInputStream());
-
             GPXFile file = new GPXFile(this.path); //MIGHT NOT BE CORRECT
             String content = file.getContentAsString();
-            System.out.println("FILE CONTENT: " + file.getContentAsString());
-            System.out.println("USER: " + username);
             String creatorString = "creator=\"" + username + "\"";
             if (!content.contains(creatorString)){
                 //i'll leave you electra to error handle :)
@@ -89,6 +80,14 @@ public class FileStatsRequest extends Thread {
                 );
                 return;
             }
+
+            /* Create socket for contacting the server on port 60000*/
+            requestSocket = new Socket(this.ip,60000);
+
+            /* Create the streams to send and receive data from server */
+            out = new ObjectOutputStream(requestSocket.getOutputStream());
+            in = new ObjectInputStream(requestSocket.getInputStream());
+
             out.writeObject(file);
             out.flush();
 
