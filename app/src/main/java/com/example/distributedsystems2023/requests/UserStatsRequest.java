@@ -81,7 +81,8 @@ public class UserStatsRequest extends Thread{
             throw new RuntimeException(e);
         } catch (Exception e) {
                 e.printStackTrace();
-        }finally {
+        }
+        finally {
             try {
                 in.close();	out.close();
                 requestSocket.close();
