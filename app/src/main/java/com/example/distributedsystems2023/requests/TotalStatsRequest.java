@@ -1,5 +1,6 @@
 package com.example.distributedsystems2023.requests;
 
+import com.example.distributedsystems2023.TotalStatsActivity;
 import com.example.distributedsystems2023.databinding.ActivityTotalStatsBinding;
 import utils.GPXStatistics;
 
@@ -11,11 +12,11 @@ import java.util.HashMap;
 
 public class TotalStatsRequest extends Thread{
 
-    private ActivityTotalStatsBinding binding;
+    private TotalStatsActivity activity;
     private String ip;
 
-    public TotalStatsRequest(ActivityTotalStatsBinding binding, String ip){
-        this.binding = binding;
+    public TotalStatsRequest(TotalStatsActivity activity, String ip){
+        this.activity = activity;
         this.ip = ip;
     }
 
@@ -42,10 +43,19 @@ public class TotalStatsRequest extends Thread{
             //System.out.println("Total Average: " + totalAverageStats.toString());
             //System.out.println("Total: " + totalStats.toString());
 
-            binding.DistValue.setText(String.valueOf(totalStats.getTotalDistance()));
-            binding.ElevationValue.setText(String.valueOf(totalStats.getTotalElevation()));
-            binding.TimeValue.setText(String.valueOf(totalStats.getTotalExerciseTime()));
-            binding.SpeedValue.setText(String.valueOf(totalStats.getAverageSpeed()));
+            this.activity.runOnUiThread(
+                    new Runnable()
+                    {
+                        @Override
+                        public void run()
+                        {
+                            activity.getBinding().DistValue.setText(String.valueOf(totalStats.getTotalDistance()));
+                            activity.getBinding().ElevationValue.setText(String.valueOf(totalStats.getTotalElevation()));
+                            activity.getBinding().TimeValue.setText(String.valueOf(totalStats.getTotalExerciseTime()));
+                            activity.getBinding().SpeedValue.setText(String.valueOf(totalStats.getAverageSpeed()));
+                        }
+                    }
+            );
 
         } catch (IOException ioException) {
             ioException.printStackTrace();

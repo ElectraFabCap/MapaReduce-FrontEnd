@@ -1,5 +1,6 @@
 package com.example.distributedsystems2023.requests;
 
+import com.example.distributedsystems2023.UserStatsActivity;
 import com.example.distributedsystems2023.databinding.ActivityTotalStatsBinding;
 import com.example.distributedsystems2023.databinding.ActivityUserStatsBinding;
 
@@ -12,12 +13,12 @@ import java.util.HashMap;
 import utils.GPXStatistics;
 
 public class UserStatsRequest extends Thread{
-    private ActivityUserStatsBinding binding;
+    private UserStatsActivity activity;
     private String ip;
     private String username;
 
-    public UserStatsRequest(ActivityUserStatsBinding binding, String ip, String username){
-        this.binding = binding;
+    public UserStatsRequest(UserStatsActivity activity, String ip, String username){
+        this.activity = activity;
         this.ip = ip;
         this.username = username;
     }
@@ -42,11 +43,20 @@ public class UserStatsRequest extends Thread{
             //System.out.println("User Average: " + userAverages.toString());
             //System.out.println("User Total: " + userTotal.toString());
 
-            binding.UserName.setText(userTotal.getUser());
-            binding.DistValue.setText(String.valueOf(userTotal.getTotalDistance()));
-            binding.ElevationValue.setText(String.valueOf(userTotal.getTotalElevation()));
-            binding.TimeValue.setText(String.valueOf(userTotal.getTotalExerciseTime()));
-            binding.SpeedValue.setText(String.valueOf(userTotal.getAverageSpeed()));
+            this.activity.runOnUiThread(
+                    new Runnable()
+                    {
+                        @Override
+                        public void run()
+                        {
+                            activity.getBinding().UserName.setText(userTotal.getUser());
+                            activity.getBinding().DistValue.setText(String.valueOf(userTotal.getTotalDistance()));
+                            activity.getBinding().ElevationValue.setText(String.valueOf(userTotal.getTotalElevation()));
+                            activity.getBinding().TimeValue.setText(String.valueOf(userTotal.getTotalExerciseTime()));
+                            activity.getBinding().SpeedValue.setText(String.valueOf(userTotal.getAverageSpeed()));
+                        }
+                    }
+            );
 
         } catch (IOException ioException) {
             ioException.printStackTrace();

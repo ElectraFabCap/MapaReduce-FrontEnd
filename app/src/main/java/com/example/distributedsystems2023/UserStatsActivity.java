@@ -7,6 +7,7 @@ import android.view.View;
 import androidx.appcompat.app.AppCompatActivity;
 
 import com.example.distributedsystems2023.databinding.ActivityUserStatsBinding;
+import com.example.distributedsystems2023.databinding.ActivityWalkStatsBinding;
 import com.example.distributedsystems2023.requests.UserStatsRequest;
 
 import utils.GPXStatistics;
@@ -37,7 +38,7 @@ public class UserStatsActivity extends AppCompatActivity {
         //TODO: SELECT IF YOU WANT USER STATS OR USER AVERAGE STATS
         //TODO: MAYBE SHOW ERROR IN UI?
         System.out.println(ip);
-        UserStatsRequest request = new UserStatsRequest(this.binding, ip, username);
+        UserStatsRequest request = new UserStatsRequest(UserStatsActivity.this, ip, username);
         request.start();
     }
 
@@ -48,5 +49,9 @@ public class UserStatsActivity extends AppCompatActivity {
                 onBackPressed();
             }
         });
+    }
+
+    public ActivityUserStatsBinding getBinding(){
+        return binding;
     }
 }

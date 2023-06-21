@@ -7,6 +7,7 @@ import android.view.View;
 import androidx.appcompat.app.AppCompatActivity;
 
 import com.example.distributedsystems2023.databinding.ActivityTotalStatsBinding;
+import com.example.distributedsystems2023.databinding.ActivityUserStatsBinding;
 import com.example.distributedsystems2023.requests.TotalStatsRequest;
 
 public class TotalStatsActivity extends AppCompatActivity {
@@ -26,7 +27,7 @@ public class TotalStatsActivity extends AppCompatActivity {
     }
 
     private void loadValues(String ip) {
-        TotalStatsRequest request = new TotalStatsRequest( this.binding, ip);
+        TotalStatsRequest request = new TotalStatsRequest(TotalStatsActivity.this, ip);
         request.start();
     }
 
@@ -38,4 +39,8 @@ public class TotalStatsActivity extends AppCompatActivity {
             }
         });
     }
+    public ActivityTotalStatsBinding getBinding(){
+        return binding;
+    }
+
 }

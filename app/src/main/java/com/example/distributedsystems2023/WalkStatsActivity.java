@@ -2,6 +2,7 @@ package com.example.distributedsystems2023;
 
 import android.content.Intent;
 import android.os.Bundle;
+import android.os.Handler;
 import android.view.View;
 
 import androidx.appcompat.app.AppCompatActivity;
@@ -22,6 +23,7 @@ import java.util.HashMap;
 public class WalkStatsActivity extends AppCompatActivity {
 
     private ActivityWalkStatsBinding binding;
+    private Handler handler = new Handler();
 
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
@@ -39,6 +41,7 @@ public class WalkStatsActivity extends AppCompatActivity {
         //This is where we do stuff with the uri (For Panos :D)
         //}
         this.loadValues(ip, path);
+
     }
 
     private void loadValues(String ip, String path) {
@@ -46,7 +49,7 @@ public class WalkStatsActivity extends AppCompatActivity {
         //TODO: DIAFORA ME MESO ORO
         //TODO: CHECK IF FILE USERNAME IS SAME WITH THE CURRENT LOGGED IN USER
 
-        FileStatsRequest request = new FileStatsRequest(this.binding, ip, path);
+        FileStatsRequest request = new FileStatsRequest(WalkStatsActivity.this, ip, path);
         request.start();
     }
 
@@ -57,5 +60,9 @@ public class WalkStatsActivity extends AppCompatActivity {
                 onBackPressed();
             }
         });
+    }
+
+    public ActivityWalkStatsBinding getBinding(){
+        return binding;
     }
 }

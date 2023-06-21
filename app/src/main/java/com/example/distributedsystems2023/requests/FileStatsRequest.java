@@ -1,5 +1,8 @@
 package com.example.distributedsystems2023.requests;
 
+import android.app.Activity;
+
+import com.example.distributedsystems2023.WalkStatsActivity;
 import com.example.distributedsystems2023.databinding.ActivityTotalStatsBinding;
 import com.example.distributedsystems2023.databinding.ActivityWalkStatsBinding;
 
@@ -14,13 +17,13 @@ import utils.GPXFile;
 import utils.GPXStatistics;
 
 public class FileStatsRequest extends Thread {
-    private ActivityWalkStatsBinding binding;
+    private WalkStatsActivity activity;
     private String ip;
 
     private String path;
 
-    public FileStatsRequest(ActivityWalkStatsBinding binding, String ip, String path){
-        this.binding = binding;
+    public FileStatsRequest(WalkStatsActivity activity, String ip, String path){
+        this.activity = activity;
         this.ip = ip;
         this.path = path;
     }
@@ -53,11 +56,20 @@ public class FileStatsRequest extends Thread {
 //            System.out.println("Current Walk: " + currentWalkStats.toString());
 //            System.out.println("User Average: " + userAverage.toString());
 //            System.out.println("Total Average: " + totalAverage.toString() + "\n");
+            this.activity.runOnUiThread(
+                new Runnable()
+                {
+                    @Override
+                    public void run()
+                    {
+                        activity.getBinding().DistValue.setText(String.valueOf(currentWalkStats.getTotalDistance()));
+                        activity.getBinding().ElevationValue.setText(String.valueOf(currentWalkStats.getTotalElevation()));
+                        activity.getBinding().TimeValue.setText(String.valueOf(currentWalkStats.getTotalExerciseTime()));
+                        activity.getBinding().SpeedValue.setText(String.valueOf(currentWalkStats.getAverageSpeed()));
 
-            binding.DistValue.setText(String.valueOf(currentWalkStats.getTotalDistance()));
-            binding.ElevationValue.setText(String.valueOf(currentWalkStats.getTotalElevation()));
-            binding.TimeValue.setText(String.valueOf(currentWalkStats.getTotalExerciseTime()));
-            binding.SpeedValue.setText(String.valueOf(currentWalkStats.getAverageSpeed()));
+                    }
+                }
+            );
 
 //        } catch (UnknownHostException unknownHost) {
 //            System.err.println("You are trying to connect to an unknown host!");
