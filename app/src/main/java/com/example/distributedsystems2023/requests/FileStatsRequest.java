@@ -23,7 +23,7 @@ public class FileStatsRequest extends Thread {
     private String path;
 
     private String username;
-    public FileStatsRequest(WalkStatsActivity activity, String ip, String path){
+    public FileStatsRequest(WalkStatsActivity activity, String ip, String path, String username){
         this.activity = activity;
         this.ip = ip;
         this.path = path;
@@ -45,13 +45,13 @@ public class FileStatsRequest extends Thread {
             in = new ObjectInputStream(requestSocket.getInputStream());
 
             GPXFile file = new GPXFile(this.path); //MIGHT NOT BE CORRECT
-
-            if (!file.getContentAsString().contains(this.username)){
+            String content = file.getContentAsString();
+            System.out.println("FILE CONTENT: " + file.getContentAsString());
+            System.out.println("USER: " + username);
+            if (!content.contains(this.username)){
                 //i'll leave you electra to error handle :)
                 return;
             }
-
-            System.out.println("FILE CONTENT: " + file.getContentAsString());
             out.writeObject(file);
             out.flush();
 

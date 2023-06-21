@@ -29,6 +29,8 @@ public class WalkStatsActivity extends AppCompatActivity {
         super.onCreate(savedInstanceState);
 
         String ip = ((GPXApplication) this.getApplication()).getMasterIP();
+        String username = ((GPXApplication) this.getApplication()).getUsername();
+
         binding = ActivityWalkStatsBinding.inflate(getLayoutInflater());
         setContentView(binding.getRoot());
 
@@ -38,16 +40,16 @@ public class WalkStatsActivity extends AppCompatActivity {
         String path = intent.getStringExtra("path");
         //hopefully this will never be null
 
-        this.loadValues(ip, path);
+        this.loadValues(ip, path, username);
 
     }
 
-    private void loadValues(String ip, String path) {
+    private void loadValues(String ip, String path, String username) {
         //TODO: MAYBE SHOW ERROR IN UI?
         //TODO: DIAFORA ME MESO ORO
         //TODO: CHECK IF FILE USERNAME IS SAME WITH THE CURRENT LOGGED IN USER
 
-        FileStatsRequest request = new FileStatsRequest(WalkStatsActivity.this, ip, path);
+        FileStatsRequest request = new FileStatsRequest(WalkStatsActivity.this, ip, path , username);
         request.start();
     }
 
