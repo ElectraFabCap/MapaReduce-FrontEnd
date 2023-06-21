@@ -11,6 +11,7 @@ import android.content.Intent;
 import android.util.Log;
 
 import com.example.distributedsystems2023.MainActivity;
+import com.example.distributedsystems2023.SelectFilesActivity;
 import com.example.distributedsystems2023.WalkStatsActivity;
 import com.example.distributedsystems2023.databinding.ActivityTotalStatsBinding;
 import com.example.distributedsystems2023.databinding.ActivityWalkStatsBinding;
@@ -18,6 +19,7 @@ import com.example.distributedsystems2023.databinding.ActivityWalkStatsBinding;
 import java.io.IOException;
 import java.io.ObjectInputStream;
 import java.io.ObjectOutputStream;
+import java.net.ConnectException;
 import java.net.Socket;
 import java.net.UnknownHostException;
 import java.util.HashMap;
@@ -70,8 +72,10 @@ public class FileStatsRequest extends Thread {
                                 builder.setTitle("Warning!")
                                         .setMessage("Selected file does not match the user.")
                                         .setPositiveButton("OK", new DialogInterface.OnClickListener() {
+
                                             public void onClick(DialogInterface dialog, int which) {
-                                               dialog.dismiss();
+                                                activity.finish();
+                                                dialog.dismiss();
                                             }
                                         });
 
@@ -119,11 +123,9 @@ public class FileStatsRequest extends Thread {
                 }
             );
 
-        } catch (UnknownHostException unknownHost) {
+        } catch (UnknownHostException | ConnectException unknownHost) {
             System.err.println("You are trying to connect to an unknown host!");
-        }catch(ClassNotFoundException e){
-            throw new RuntimeException(e);
-        } catch (IOException ioException) {
+
             this.activity.runOnUiThread(
                     new Runnable()
                     {
@@ -133,13 +135,12 @@ public class FileStatsRequest extends Thread {
                         {
                             AlertDialog.Builder builder = new AlertDialog.Builder(activity);
                             builder.setTitle("Warning!")
-                                    .setMessage("Could not fetch data from the file.")
+                                    .setMessage("Unable to connect to server.")
                                     .setPositiveButton("OK", new DialogInterface.OnClickListener() {
-                                        private Context activity;
-
                                         public void onClick(DialogInterface dialog, int which) {
-                                            Intent intent = new Intent(this.activity.getApplicationContext(),  MainActivity.class);
-                                            this.activity.getApplicationContext().startActivity(intent);
+                                            Intent intent = new Intent(activity.getApplicationContext(),  MainActivity.class);
+                                            activity.startActivity(intent);
+
                                             dialog.dismiss();
                                         }
                                     });
@@ -149,73 +150,47 @@ public class FileStatsRequest extends Thread {
                         }
                     }
             );
-            ioException.printStackTrace();
-
 
         } catch (Exception e) {
+
+            this.activity.runOnUiThread(
+                    new Runnable()
+                    {
+                        @SuppressLint("SetTextI18n")
+                        @Override
+                        public void run()
+                        {
+                            AlertDialog.Builder builder = new AlertDialog.Builder(activity);
+                            builder.setTitle("Warning!")
+                                    .setMessage("Could not fetch data from the server.")
+                                    .setPositiveButton("OK", new DialogInterface.OnClickListener() {
+                                        public void onClick(DialogInterface dialog, int which) {
+                                            Intent intent = new Intent(activity.getApplicationContext(),  MainActivity.class);
+                                            activity.startActivity(intent);
+
+                                            dialog.dismiss();
+                                        }
+                                    });
+
+                            AlertDialog alertDialog = builder.create();
+                            alertDialog.show();
+                        }
+                    }
+            );
+
             e.printStackTrace();
         } finally {
             try {
-                in.close();	out.close();
-                requestSocket.close();
+                if (in != null)
+                    in.close();
+                if (out != null)
+                    out.close();
+                if (requestSocket != null)
+                    requestSocket.close();
             }
-            catch(NullPointerException e){
-                this.activity.runOnUiThread(
-                        new Runnable()
-                        {
-                            @SuppressLint("SetTextI18n")
-                            @Override
-                            public void run()
-                            {
-                                AlertDialog.Builder builder = new AlertDialog.Builder(activity);
-                                builder.setTitle("Warning!")
-                                        .setMessage("Could not fetch data from the file.")
-                                        .setPositiveButton("OK", new DialogInterface.OnClickListener() {
-                                            private Context activity;
-
-                                            public void onClick(DialogInterface dialog, int which) {
-                                                Intent intent = new Intent(this.activity.getApplicationContext(),  MainActivity.class);
-                                                this.activity.getApplicationContext().startActivity(intent);
-                                                dialog.dismiss();
-                                            }
-                                        });
-
-                                AlertDialog alertDialog = builder.create();
-                                alertDialog.show();
-                            }
-                        }
-                );
-
+            catch(Exception e){
                 Log.e(TAG, "Error message", e);
                 e.printStackTrace();
-            }
-            catch (IOException ioException) {
-                this.activity.runOnUiThread(
-                        new Runnable()
-                        {
-                            @SuppressLint("SetTextI18n")
-                            @Override
-                            public void run()
-                            {
-                                AlertDialog.Builder builder = new AlertDialog.Builder(activity);
-                                builder.setTitle("Warning!")
-                                        .setMessage("Could not fetch data from the file.")
-                                        .setPositiveButton("OK", new DialogInterface.OnClickListener() {
-                                            private Context activity;
-
-                                            public void onClick(DialogInterface dialog, int which) {
-                                                Intent intent = new Intent(this.activity.getApplicationContext(),  MainActivity.class);
-                                                this.activity.getApplicationContext().startActivity(intent);
-                                                dialog.dismiss();
-                                            }
-                                        });
-
-                                AlertDialog alertDialog = builder.create();
-                                alertDialog.show();
-                            }
-                        }
-                );
-                ioException.printStackTrace();
             }
         }
     }

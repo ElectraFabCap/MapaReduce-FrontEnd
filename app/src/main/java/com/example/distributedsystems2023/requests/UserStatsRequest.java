@@ -1,7 +1,15 @@
 package com.example.distributedsystems2023.requests;
 
-import android.annotation.SuppressLint;
+import static android.content.ContentValues.TAG;
 
+import android.annotation.SuppressLint;
+import android.app.AlertDialog;
+import android.content.Context;
+import android.content.DialogInterface;
+import android.content.Intent;
+import android.util.Log;
+
+import com.example.distributedsystems2023.MainActivity;
 import com.example.distributedsystems2023.UserStatsActivity;
 import com.example.distributedsystems2023.databinding.ActivityTotalStatsBinding;
 import com.example.distributedsystems2023.databinding.ActivityUserStatsBinding;
@@ -9,7 +17,9 @@ import com.example.distributedsystems2023.databinding.ActivityUserStatsBinding;
 import java.io.DataOutputStream;
 import java.io.IOException;
 import java.io.ObjectInputStream;
+import java.net.ConnectException;
 import java.net.Socket;
+import java.net.UnknownHostException;
 import java.util.HashMap;
 
 import utils.GPXStatistics;
@@ -74,20 +84,70 @@ public class UserStatsRequest extends Thread{
                     }
             );
 
-        } catch (IOException ioException) {
-            ioException.printStackTrace();
+        }  catch (UnknownHostException | ConnectException unknownHost) {
+            this.activity.runOnUiThread(
+                    new Runnable()
+                    {
+                        @SuppressLint("SetTextI18n")
+                        @Override
+                        public void run()
+                        {
+                            AlertDialog.Builder builder = new AlertDialog.Builder(activity);
+                            builder.setTitle("Warning!")
+                                    .setMessage("Unable to connect to server.")
+                                    .setPositiveButton("OK", new DialogInterface.OnClickListener() {
 
-        } catch (ClassNotFoundException e) {
-            throw new RuntimeException(e);
+                                        public void onClick(DialogInterface dialog, int which) {
+                                            activity.finish();
+                                            dialog.dismiss();
+                                        }
+                                    });
+
+                            AlertDialog alertDialog = builder.create();
+                            alertDialog.show();
+                        }
+                    }
+            );
+
         } catch (Exception e) {
-                e.printStackTrace();
-        }
-        finally {
+
+            this.activity.runOnUiThread(
+                    new Runnable()
+                    {
+                        @SuppressLint("SetTextI18n")
+                        @Override
+                        public void run()
+                        {
+                            AlertDialog.Builder builder = new AlertDialog.Builder(activity);
+                            builder.setTitle("Warning!")
+                                    .setMessage("Could not fetch data from the server")
+                                    .setPositiveButton("OK", new DialogInterface.OnClickListener() {
+
+                                        public void onClick(DialogInterface dialog, int which) {
+                                            activity.finish();
+                                            dialog.dismiss();
+                                        }
+                                    });
+
+                            AlertDialog alertDialog = builder.create();
+                            alertDialog.show();
+                        }
+                    }
+            );
+
+            e.printStackTrace();
+        } finally {
             try {
-                in.close();	out.close();
-                requestSocket.close();
-            } catch (IOException ioException) {
-                ioException.printStackTrace();
+                if (in != null)
+                    in.close();
+                if (out != null)
+                    out.close();
+                if (requestSocket != null)
+                    requestSocket.close();
+            }
+            catch(Exception e){
+                Log.e(TAG, "Error message", e);
+                e.printStackTrace();
             }
         }
     }
