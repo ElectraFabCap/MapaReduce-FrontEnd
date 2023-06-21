@@ -59,7 +59,8 @@ public class FileStatsRequest extends Thread {
             String content = file.getContentAsString();
             System.out.println("FILE CONTENT: " + file.getContentAsString());
             System.out.println("USER: " + username);
-            if (!content.contains(this.username)){
+            String creatorString = "creator=\"" + username + "\"";
+            if (!content.contains(creatorString)){
                 //i'll leave you electra to error handle :)
                 this.activity.runOnUiThread(
                         new Runnable()
