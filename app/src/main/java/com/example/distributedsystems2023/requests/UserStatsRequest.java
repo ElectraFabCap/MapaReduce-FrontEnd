@@ -1,5 +1,7 @@
 package com.example.distributedsystems2023.requests;
 
+import android.annotation.SuppressLint;
+
 import com.example.distributedsystems2023.UserStatsActivity;
 import com.example.distributedsystems2023.databinding.ActivityTotalStatsBinding;
 import com.example.distributedsystems2023.databinding.ActivityUserStatsBinding;
@@ -47,6 +49,7 @@ public class UserStatsRequest extends Thread{
             this.activity.runOnUiThread(
                     new Runnable()
                     {
+                        @SuppressLint("SetTextI18n")
                         @Override
                         public void run()
                         {
@@ -63,10 +66,10 @@ public class UserStatsRequest extends Thread{
                             activity.getBinding().SpeedValue.setText(String.valueOf(
                                     (double) Math.round(userTotal.getAverageSpeed() * 100) / 100
                             ));
-                            if (userTotal.getTotalDistance() != 0) {activity.getBinding().UserDistPerc.setText(String.valueOf(statComparison[0]));}
-                            if (userTotal.getTotalExerciseTimeInSeconds() != 0) {activity.getBinding().UserTimePerc.setText(String.valueOf(statComparison[1]));}
-                            if (userTotal.getTotalElevation() != 0) {activity.getBinding().UserElePerc.setText(String.valueOf(statComparison[2]));}
-                            if (userTotal.getAverageSpeed() != 0) {activity.getBinding().UserSpeedPerc.setText(String.valueOf(statComparison[3]));}
+                            if (userTotal.getTotalDistance() != 0) {activity.getBinding().UserDistPerc.setText((statComparison[0])+"%");}
+                            if (userTotal.getTotalExerciseTimeInSeconds() != 0) {activity.getBinding().UserTimePerc.setText((statComparison[1])+"%");}
+                            if (userTotal.getTotalElevation() != 0) {activity.getBinding().UserElePerc.setText((statComparison[2])+"%");}
+                            if (userTotal.getAverageSpeed() != 0) {activity.getBinding().UserSpeedPerc.setText((statComparison[3])+"%");}
                         }
                     }
             );
