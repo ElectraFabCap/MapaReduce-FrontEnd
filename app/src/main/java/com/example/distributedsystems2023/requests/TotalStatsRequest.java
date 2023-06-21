@@ -49,10 +49,18 @@ public class TotalStatsRequest extends Thread{
                         @Override
                         public void run()
                         {
-                            activity.getBinding().DistValue.setText(String.valueOf(totalStats.getTotalDistance()));
-                            activity.getBinding().ElevationValue.setText(String.valueOf(totalStats.getTotalElevation()));
-                            activity.getBinding().TimeValue.setText(String.valueOf(totalStats.getTotalExerciseTime()));
-                            activity.getBinding().SpeedValue.setText(String.valueOf(totalStats.getAverageSpeed()));
+                            activity.getBinding().DistValue.setText(String.valueOf(
+                                    Math.round(totalStats.getTotalDistance()) / 1000
+                            ));
+                            activity.getBinding().ElevationValue.setText(String.valueOf(
+                                    totalStats.getTotalElevation()
+                            ));
+                            activity.getBinding().TimeValue.setText(String.valueOf(
+                                    totalStats.getTotalExerciseTime()
+                            ));
+                            activity.getBinding().SpeedValue.setText(String.valueOf(
+                                    (double) Math.round(totalStats.getAverageSpeed() * 100) / 100
+                            ));
                         }
                     }
             );

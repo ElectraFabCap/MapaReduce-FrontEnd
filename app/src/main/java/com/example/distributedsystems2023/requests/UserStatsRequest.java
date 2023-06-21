@@ -50,10 +50,18 @@ public class UserStatsRequest extends Thread{
                         public void run()
                         {
                             activity.getBinding().UserName.setText(userTotal.getUser());
-                            activity.getBinding().DistValue.setText(String.valueOf(userTotal.getTotalDistance()));
-                            activity.getBinding().ElevationValue.setText(String.valueOf(userTotal.getTotalElevation()));
-                            activity.getBinding().TimeValue.setText(String.valueOf(userTotal.getTotalExerciseTime()));
-                            activity.getBinding().SpeedValue.setText(String.valueOf(userTotal.getAverageSpeed()));
+                            activity.getBinding().DistValue.setText(String.valueOf(
+                                    Math.round(userTotal.getTotalDistance()) / 1000
+                            ));
+                            activity.getBinding().ElevationValue.setText(String.valueOf(
+                                    userTotal.getTotalElevation()
+                            ));
+                            activity.getBinding().TimeValue.setText(String.valueOf(
+                                    userTotal.getTotalExerciseTime()
+                            ));
+                            activity.getBinding().SpeedValue.setText(String.valueOf(
+                                    (double) Math.round(userTotal.getAverageSpeed() * 100) / 100
+                            ));
                         }
                     }
             );

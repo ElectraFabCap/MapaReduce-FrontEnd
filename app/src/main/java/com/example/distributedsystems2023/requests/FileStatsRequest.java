@@ -62,10 +62,18 @@ public class FileStatsRequest extends Thread {
                     @Override
                     public void run()
                     {
-                        activity.getBinding().DistValue.setText(String.valueOf(currentWalkStats.getTotalDistance()));
-                        activity.getBinding().ElevationValue.setText(String.valueOf(currentWalkStats.getTotalElevation()));
-                        activity.getBinding().TimeValue.setText(String.valueOf(currentWalkStats.getTotalExerciseTime()));
-                        activity.getBinding().SpeedValue.setText(String.valueOf(currentWalkStats.getAverageSpeed()));
+                        activity.getBinding().DistValue.setText(String.valueOf(
+                                Math.round(currentWalkStats.getTotalDistance()) / 1000
+                        ));
+                        activity.getBinding().ElevationValue.setText(String.valueOf(
+                                currentWalkStats.getTotalElevation()
+                        ));
+                        activity.getBinding().TimeValue.setText(String.valueOf(
+                                currentWalkStats.getTotalExerciseTime()
+                        ));
+                        activity.getBinding().SpeedValue.setText(String.valueOf(
+                                (double) Math.round(currentWalkStats.getAverageSpeed() * 100) / 100
+                        ));
 
                     }
                 }
