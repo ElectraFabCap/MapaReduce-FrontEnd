@@ -112,7 +112,7 @@ public class TotalStatsRequest extends Thread{
                         {
                             AlertDialog.Builder builder = new AlertDialog.Builder(activity);
                             builder.setTitle("Warning!")
-                                    .setMessage("Could not fetch statistics from server.")
+                                    .setMessage("Could not fetch data from server.")
                                     .setPositiveButton("OK", new DialogInterface.OnClickListener() {
 
                                         public void onClick(DialogInterface dialog, int which) {
