@@ -5,13 +5,14 @@ import android.content.Intent;
 import android.os.Bundle;
 import android.view.View;
 import android.widget.LinearLayout;
+import android.widget.TextView;
 
 import com.example.distributedsystems2023.databinding.ActivityMainBinding;
 
 
 public class MainActivity extends AppCompatActivity {
 
-//    private final  String username = getIntent().getStringExtra("username");
+
     private ActivityMainBinding binding;
 
     private LinearLayout layoutFile;
@@ -21,12 +22,15 @@ public class MainActivity extends AppCompatActivity {
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
+        String username = ((GPXApplication) getApplication()).getUsername();
         setContentView(R.layout.activity_main);
         binding = ActivityMainBinding.inflate(getLayoutInflater());
         setContentView(binding.getRoot());
         layoutFile = findViewById(R.id.layoutFile);
         layoutWalk = findViewById(R.id.layoutWalk);
         layoutTotal = findViewById(R.id.layoutTotal);
+        TextView textView = findViewById(R.id.textUsername);
+        textView.setText(username);
         this.assignLogoutButtonListener();
 
         layoutFile.setOnClickListener(new View.OnClickListener() {
