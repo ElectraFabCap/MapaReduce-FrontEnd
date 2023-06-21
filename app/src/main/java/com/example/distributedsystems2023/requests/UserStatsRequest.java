@@ -54,7 +54,7 @@ public class UserStatsRequest extends Thread{
                                     Math.round(userTotal.getTotalDistance()) / 1000
                             ));
                             activity.getBinding().ElevationValue.setText(String.valueOf(
-                                    userTotal.getTotalElevation()
+                                    (int) userTotal.getTotalElevation()
                             ));
                             activity.getBinding().TimeValue.setText(String.valueOf(
                                     userTotal.getTotalExerciseTime()
