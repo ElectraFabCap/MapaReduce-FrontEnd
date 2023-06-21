@@ -104,7 +104,9 @@ public class UserStatsRequest extends Thread{
                                     });
 
                             AlertDialog alertDialog = builder.create();
-                            alertDialog.show();
+
+                            if(!activity.isFinishing())
+                                alertDialog.show();
                         }
                     }
             );
@@ -130,7 +132,9 @@ public class UserStatsRequest extends Thread{
                                     });
 
                             AlertDialog alertDialog = builder.create();
-                            alertDialog.show();
+
+                            if(!activity.isFinishing())
+                                alertDialog.show();
                         }
                     }
             );

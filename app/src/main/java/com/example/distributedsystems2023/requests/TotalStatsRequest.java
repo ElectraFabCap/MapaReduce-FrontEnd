@@ -94,7 +94,9 @@ public class TotalStatsRequest extends Thread{
                                     });
 
                             AlertDialog alertDialog = builder.create();
-                            alertDialog.show();
+
+                            if(!activity.isFinishing())
+                                alertDialog.show();
                         }
                     }
             );
@@ -120,7 +122,9 @@ public class TotalStatsRequest extends Thread{
                                     });
 
                             AlertDialog alertDialog = builder.create();
-                            alertDialog.show();
+
+                            if(!activity.isFinishing())
+                                alertDialog.show();
                         }
                     }
             );

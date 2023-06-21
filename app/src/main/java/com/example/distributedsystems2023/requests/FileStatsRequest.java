@@ -80,7 +80,9 @@ public class FileStatsRequest extends Thread {
                                         });
 
                                 AlertDialog alertDialog = builder.create();
-                                alertDialog.show();
+
+                                if(!activity.isFinishing())
+                                    alertDialog.show();
                             }
                         }
                 );
@@ -146,7 +148,9 @@ public class FileStatsRequest extends Thread {
                                     });
 
                             AlertDialog alertDialog = builder.create();
-                            alertDialog.show();
+
+                            if(!activity.isFinishing())
+                                alertDialog.show();
                         }
                     }
             );
@@ -173,7 +177,9 @@ public class FileStatsRequest extends Thread {
                                     });
 
                             AlertDialog alertDialog = builder.create();
-                            alertDialog.show();
+
+                            if(!activity.isFinishing())
+                                alertDialog.show();
                         }
                     }
             );
