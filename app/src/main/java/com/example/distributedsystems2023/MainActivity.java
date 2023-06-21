@@ -2,18 +2,16 @@ package com.example.distributedsystems2023;
 
 import androidx.appcompat.app.AppCompatActivity;
 import android.content.Intent;
-import android.content.SharedPreferences;
 import android.os.Bundle;
 import android.view.View;
 import android.widget.LinearLayout;
 
 import com.example.distributedsystems2023.databinding.ActivityMainBinding;
-import com.example.distributedsystems2023.utils.ui.login.LoginActivity;
 
 
 public class MainActivity extends AppCompatActivity {
 
-    private final  String username = getIntent().getStringExtra("username");;
+//    private final  String username = getIntent().getStringExtra("username");
     private ActivityMainBinding binding;
 
     private LinearLayout layoutFile;
@@ -24,7 +22,6 @@ public class MainActivity extends AppCompatActivity {
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_main);
-
         binding = ActivityMainBinding.inflate(getLayoutInflater());
         setContentView(binding.getRoot());
         layoutFile = findViewById(R.id.layoutFile);

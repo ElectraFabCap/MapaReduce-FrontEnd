@@ -1,12 +1,16 @@
 package com.example.distributedsystems2023;
 
+import android.content.Intent;
 import android.os.Bundle;
 import android.view.View;
 
 import androidx.appcompat.app.AppCompatActivity;
 
 import com.example.distributedsystems2023.databinding.ActivityUserStatsBinding;
-import com.example.distributedsystems2023.utils.GPXStatistics;
+import com.example.distributedsystems2023.databinding.ActivityWalkStatsBinding;
+import com.example.distributedsystems2023.requests.UserStatsRequest;
+
+import utils.GPXStatistics;
 
 import java.io.DataOutputStream;
 import java.io.IOException;
@@ -21,56 +25,21 @@ public class UserStatsActivity extends AppCompatActivity {
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
 
+        String username = ((GPXApplication) this.getApplication()).getUsername();
+        String ip = ((GPXApplication) this.getApplication()).getMasterIP();
         binding = ActivityUserStatsBinding.inflate(getLayoutInflater());
         setContentView(binding.getRoot());
 
         this.assignBackButtonListener();
-        this.loadValues();
+        this.loadValues(ip, username);
     }
 
-    private void loadValues() {
-        //TODO: GET IP AND USERNAME FROM APP
+    private void loadValues(String ip, String username) {
         //TODO: SELECT IF YOU WANT USER STATS OR USER AVERAGE STATS
         //TODO: MAYBE SHOW ERROR IN UI?
-
-        DataOutputStream out= null ;
-        ObjectInputStream in = null ;
-        Socket requestSocket= null ;
-
-        try {
-            requestSocket = new Socket("localhost",60001);
-            out = new DataOutputStream(requestSocket.getOutputStream());
-
-            out.writeUTF("user1");
-            out.flush();
-
-            in = new ObjectInputStream(requestSocket.getInputStream());
-            HashMap<String, GPXStatistics> res = (HashMap<String,GPXStatistics>) in.readObject();
-            //GPXStatistics userAverages = res.get("userAverageStats");
-            GPXStatistics userTotal = res.get("userTotalStats");
-
-            //System.out.println("User Average: " + userAverages.toString());
-            //System.out.println("User Total: " + userTotal.toString());
-
-            binding.UserName.setText(userTotal.getUser());
-            binding.DistValue.setText(String.valueOf(userTotal.getTotalDistance()));
-            binding.ElevationValue.setText(String.valueOf(userTotal.getTotalElevation()));
-            binding.TimeValue.setText(String.valueOf(userTotal.getTotalExerciseTime()));
-            binding.SpeedValue.setText(String.valueOf(userTotal.getAverageSpeed()));
-
-        } catch (IOException ioException) {
-            ioException.printStackTrace();
-
-        } catch (ClassNotFoundException e) {
-            throw new RuntimeException(e);
-        } finally {
-            try {
-                in.close();	out.close();
-                requestSocket.close();
-            } catch (IOException ioException) {
-                ioException.printStackTrace();
-            }
-        }
+        System.out.println(ip);
+        UserStatsRequest request = new UserStatsRequest(UserStatsActivity.this, ip, username);
+        request.start();
     }
 
     private void assignBackButtonListener() {
@@ -80,5 +49,9 @@ public class UserStatsActivity extends AppCompatActivity {
                 onBackPressed();
             }
         });
+    }
+
+    public ActivityUserStatsBinding getBinding(){
+        return binding;
     }
 }
