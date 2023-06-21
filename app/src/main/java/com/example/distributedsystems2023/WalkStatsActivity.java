@@ -49,7 +49,7 @@ public class WalkStatsActivity extends AppCompatActivity {
         //TODO: DIAFORA ME MESO ORO
         //TODO: CHECK IF FILE USERNAME IS SAME WITH THE CURRENT LOGGED IN USER
 
-        FileStatsRequest request = new FileStatsRequest(WalkStatsActivity.this, ip, path , username);
+        FileStatsRequest request = new FileStatsRequest(WalkStatsActivity.this,  ip, path , username);
         request.start();
     }
 
