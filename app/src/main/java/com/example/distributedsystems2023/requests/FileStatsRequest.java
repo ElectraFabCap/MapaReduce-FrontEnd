@@ -1,5 +1,6 @@
 package com.example.distributedsystems2023.requests;
 
+import android.annotation.SuppressLint;
 import android.app.Activity;
 
 import com.example.distributedsystems2023.WalkStatsActivity;
@@ -57,12 +58,15 @@ public class FileStatsRequest extends Thread {
 
             HashMap<String, GPXStatistics> res = (HashMap<String,GPXStatistics>) in.readObject();
             GPXStatistics currentWalkStats = res.get("currentRun");
-//            GPXStatistics userAverage = res.get("userAverage");
-//            GPXStatistics totalAverage = res.get("totalAverage");
+            GPXStatistics averageWalkStats = res.get("totalAverage");
+            assert currentWalkStats != null;
+            assert averageWalkStats != null;
+            double[] statComparison = currentWalkStats.compare(averageWalkStats);
 
             this.activity.runOnUiThread(
                 new Runnable()
                 {
+                    @SuppressLint("SetTextI18n")
                     @Override
                     public void run()
                     {
@@ -78,7 +82,10 @@ public class FileStatsRequest extends Thread {
                         activity.getBinding().SpeedValue.setText(String.valueOf(
                                 (double) Math.round(currentWalkStats.getAverageSpeed() * 100) / 100
                         ));
-
+                        if (currentWalkStats.getTotalDistance() != 0) {activity.getBinding().DistPerc.setText((statComparison[0])+"%");}
+                        if (currentWalkStats.getTotalExerciseTimeInSeconds() != 0) {activity.getBinding().TimePerc.setText((statComparison[1])+"%");}
+                        if (currentWalkStats.getTotalElevation() != 0) {activity.getBinding().ElePerc.setText((statComparison[2])+"%");}
+                        if (currentWalkStats.getAverageSpeed() != 0) {activity.getBinding().SpeedPerc.setText((statComparison[3])+"%");}
                     }
                 }
             );

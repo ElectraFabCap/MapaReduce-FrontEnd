@@ -2,6 +2,7 @@
 <androidx.constraintlayout.widget.ConstraintLayout xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:app="http://schemas.android.com/apk/res-auto"
     xmlns:tools="http://schemas.android.com/tools"
+    android:id="@+id/ConstraintLayout"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
     android:background="@color/colorPrimaryLight">
@@ -24,10 +25,10 @@
             android:textSize="18sp"
             app:layout_constraintBottom_toBottomOf="parent"
             app:layout_constraintEnd_toEndOf="parent"
-            app:layout_constraintHorizontal_bias="0.078"
+            app:layout_constraintHorizontal_bias="0.014"
             app:layout_constraintStart_toStartOf="parent"
             app:layout_constraintTop_toTopOf="parent"
-            app:layout_constraintVertical_bias="0.221" />
+            app:layout_constraintVertical_bias="0.215" />
 
         <TextView
             android:id="@+id/ElevationLabel"
@@ -76,10 +77,10 @@
             android:textSize="18sp"
             app:layout_constraintBottom_toBottomOf="@+id/DistLabel"
             app:layout_constraintEnd_toEndOf="parent"
-            app:layout_constraintHorizontal_bias="0.722"
+            app:layout_constraintHorizontal_bias="0.231"
             app:layout_constraintStart_toEndOf="@+id/DistLabel"
             app:layout_constraintTop_toTopOf="@+id/DistLabel"
-            app:layout_constraintVertical_bias="1.0" />
+            app:layout_constraintVertical_bias="0.0" />
 
         <TextView
             android:id="@+id/TimeValue"
@@ -139,5 +140,47 @@
             app:layout_constraintStart_toStartOf="parent"
             app:layout_constraintTop_toTopOf="parent"
             app:layout_constraintVertical_bias="0.026" />
+
+        <TextView
+            android:id="@+id/DistPerc"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="@string/placeholder"
+            app:layout_constraintBottom_toBottomOf="@+id/DistValue"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintHorizontal_bias="0.656"
+            app:layout_constraintStart_toEndOf="@+id/DistValue"
+            app:layout_constraintTop_toTopOf="@+id/DistValue"
+            app:layout_constraintVertical_bias="0.0" />
+
+        <TextView
+            android:id="@+id/TimePerc"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="@string/placeholder"
+            app:layout_constraintBottom_toBottomOf="@+id/TimeValue"
+            app:layout_constraintEnd_toEndOf="@+id/DistPerc"
+            app:layout_constraintStart_toStartOf="@+id/DistPerc"
+            app:layout_constraintTop_toTopOf="@+id/TimeValue" />
+
+        <TextView
+            android:id="@+id/ElePerc"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="@string/placeholder"
+            app:layout_constraintBottom_toBottomOf="@+id/ElevationValue"
+            app:layout_constraintEnd_toEndOf="@+id/TimePerc"
+            app:layout_constraintStart_toStartOf="@+id/TimePerc"
+            app:layout_constraintTop_toTopOf="@+id/ElevationValue" />
+
+        <TextView
+            android:id="@+id/SpeedPerc"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="@string/placeholder"
+            app:layout_constraintBottom_toBottomOf="@+id/SpeedValue"
+            app:layout_constraintEnd_toEndOf="@+id/ElePerc"
+            app:layout_constraintStart_toStartOf="@+id/ElePerc"
+            app:layout_constraintTop_toTopOf="@+id/SpeedValue" />
     </androidx.constraintlayout.widget.ConstraintLayout>
 </androidx.constraintlayout.widget.ConstraintLayout>
