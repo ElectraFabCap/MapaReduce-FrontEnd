@@ -74,11 +74,8 @@ public class GPXStatistics implements Serializable {
         return statArray;
     }
 
-    private double percentageComparison(double x, double y){
-        if (x==0){return 0;}
-        else{
-        double z = 100*((x-y)/y);
-        return (double)Math.round((z*10)/10);
-        }
+    private double percentageComparison(double x, double y) {
+        double z = 100 * ((x - y) / y);
+        return (double) Math.round((z * 10) / 10);
     }
 }

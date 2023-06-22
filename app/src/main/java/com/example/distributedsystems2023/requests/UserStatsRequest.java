@@ -77,28 +77,28 @@ public class UserStatsRequest extends Thread{
                             activity.getBinding().SpeedValue.setText(String.valueOf(
                                     (double) Math.round(userTotal.getAverageSpeed() * 100) / 100
                             ));
-                            if (userTotal.getTotalDistance() != 0) {activity.getBinding().UserDistPerc.setText((statComparison[0])+"%");}
+                            activity.getBinding().UserDistPerc.setText((statComparison[0])+"%");
                             if (statComparison[0] > 0.0) {
                                 activity.getBinding().UserDistPerc.setTextColor(Color.GREEN);
                             }
                             if (statComparison[0] < 0.0) {
                                 activity.getBinding().UserDistPerc.setTextColor(Color.RED);
                             }
-                            if (userTotal.getTotalExerciseTimeInSeconds() != 0) {activity.getBinding().UserTimePerc.setText((statComparison[1])+"%");}
+                            activity.getBinding().UserTimePerc.setText((statComparison[1])+"%");
                             if (statComparison[1] > 0.0) {
                                 activity.getBinding().UserTimePerc.setTextColor(Color.GREEN);
                             }
                             if (statComparison[1] < 0.0) {
                                 activity.getBinding().UserTimePerc.setTextColor(Color.RED);
                             }
-                            if (userTotal.getTotalElevation() != 0) {activity.getBinding().UserElePerc.setText((statComparison[2])+"%");}
+                            activity.getBinding().UserElePerc.setText((statComparison[2])+"%");
                             if (statComparison[2] > 0.0) {
                                 activity.getBinding().UserElePerc.setTextColor(Color.GREEN);
                             }
                             if (statComparison[2] < 0.0) {
                                 activity.getBinding().UserElePerc.setTextColor(Color.RED);
                             }
-                            if (userTotal.getAverageSpeed() != 0) {activity.getBinding().UserSpeedPerc.setText((statComparison[3])+"%");}
+                            activity.getBinding().UserSpeedPerc.setText((statComparison[3])+"%");
                             if (statComparison[3] > 0.0) {
                                 activity.getBinding().UserSpeedPerc.setTextColor(Color.GREEN);
                             }
