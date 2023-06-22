@@ -8,6 +8,7 @@ import android.app.AlertDialog;
 import android.content.Context;
 import android.content.DialogInterface;
 import android.content.Intent;
+import android.graphics.Color;
 import android.util.Log;
 
 import com.example.distributedsystems2023.MainActivity;
@@ -118,9 +119,33 @@ public class FileStatsRequest extends Thread {
                                 (double) Math.round(currentWalkStats.getAverageSpeed() * 100) / 100
                         ));
                         if (currentWalkStats.getTotalDistance() != 0) {activity.getBinding().DistPerc.setText((statComparison[0])+"%");}
+                        if (statComparison[0] > 0.0) {
+                            activity.getBinding().DistPerc.setTextColor(Color.GREEN);
+                        }
+                        if (statComparison[0] < 0.0) {
+                            activity.getBinding().DistPerc.setTextColor(Color.RED);
+                        }
                         if (currentWalkStats.getTotalExerciseTimeInSeconds() != 0) {activity.getBinding().TimePerc.setText((statComparison[1])+"%");}
+                        if (statComparison[1] > 0.0) {
+                            activity.getBinding().TimePerc.setTextColor(Color.GREEN);
+                        }
+                        if (statComparison[1] < 0.0) {
+                            activity.getBinding().TimePerc.setTextColor(Color.RED);
+                        }
                         if (currentWalkStats.getTotalElevation() != 0) {activity.getBinding().ElePerc.setText((statComparison[2])+"%");}
+                        if (statComparison[2] > 0.0) {
+                            activity.getBinding().ElePerc.setTextColor(Color.GREEN);
+                        }
+                        if (statComparison[2] < 0.0) {
+                            activity.getBinding().ElePerc.setTextColor(Color.RED);
+                        }
                         if (currentWalkStats.getAverageSpeed() != 0) {activity.getBinding().SpeedPerc.setText((statComparison[3])+"%");}
+                        if (statComparison[3] > 0.0) {
+                            activity.getBinding().SpeedPerc.setTextColor(Color.GREEN);
+                        }
+                        if (statComparison[3] < 0.0) {
+                            activity.getBinding().SpeedPerc.setTextColor(Color.RED);
+                        }
                     }
                 }
             );

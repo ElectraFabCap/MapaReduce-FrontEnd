@@ -25,7 +25,7 @@ public class GPXStatistics implements Serializable {
     }
 
     public double getAverageSpeed() {
-        return this.totalDistance/this.totalExerciseTime;
+        return (this.totalDistance/this.totalExerciseTime)*3.6;
     }
 
     public double getTotalElevation() {
@@ -75,7 +75,10 @@ public class GPXStatistics implements Serializable {
     }
 
     private double percentageComparison(double x, double y){
+        if (x==0){return 0;}
+        else{
         double z = 100*((x-y)/y);
         return (double)Math.round((z*10)/10);
+        }
     }
 }
