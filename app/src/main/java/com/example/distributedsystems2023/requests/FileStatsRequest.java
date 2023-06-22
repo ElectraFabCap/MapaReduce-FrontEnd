@@ -52,8 +52,7 @@ public class FileStatsRequest extends Thread {
             GPXFile file = new GPXFile(this.path); //MIGHT NOT BE CORRECT
             String content = file.getContentAsString();
             String creatorString = "creator=\"" + username + "\"";
-            if (!content.contains(creatorString)){
-                //i'll leave you electra to error handle :)
+            if (!username.equals("admin") && !content.contains(creatorString)){
                 this.activity.runOnUiThread(
                         new Runnable()
                         {
@@ -121,29 +120,25 @@ public class FileStatsRequest extends Thread {
                         activity.getBinding().DistPerc.setText((statComparison[0])+"%");
                         if (statComparison[0] > 0.0) {
                             activity.getBinding().DistPerc.setTextColor(Color.GREEN);
-                        }
-                        if (statComparison[0] < 0.0) {
+                        }else if (statComparison[0] < 0.0) {
                             activity.getBinding().DistPerc.setTextColor(Color.RED);
                         }
                         activity.getBinding().TimePerc.setText((statComparison[1])+"%");
                         if (statComparison[1] > 0.0) {
                             activity.getBinding().TimePerc.setTextColor(Color.GREEN);
-                        }
-                        if (statComparison[1] < 0.0) {
+                        }else if (statComparison[1] < 0.0) {
                             activity.getBinding().TimePerc.setTextColor(Color.RED);
                         }
                         activity.getBinding().ElePerc.setText((statComparison[2])+"%");
                         if (statComparison[2] > 0.0) {
                             activity.getBinding().ElePerc.setTextColor(Color.GREEN);
-                        }
-                        if (statComparison[2] < 0.0) {
+                        }else if (statComparison[2] < 0.0) {
                             activity.getBinding().ElePerc.setTextColor(Color.RED);
                         }
                         activity.getBinding().SpeedPerc.setText((statComparison[3])+"%");
                         if (statComparison[3] > 0.0) {
                             activity.getBinding().SpeedPerc.setTextColor(Color.GREEN);
-                        }
-                        if (statComparison[3] < 0.0) {
+                        }else if (statComparison[3] < 0.0) {
                             activity.getBinding().SpeedPerc.setTextColor(Color.RED);
                         }
                     }
